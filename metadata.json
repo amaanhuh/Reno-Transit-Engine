@@ -1,0 +1,6 @@
+{
+  "name": "SmartBus - Bus Ticket Booking & Reservation System",
+  "description": "Professional intercity bus ticket booking, real-time seat allocation, cancellation management, schedule departures, and audit reporting according to PRD specifications.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

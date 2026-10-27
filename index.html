@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reno Transit Engine - Smart Bus Reservation & Fleet System</title>
+    <meta name="description" content="Reno Transit Engine: Professional intercity bus ticket booking, real-time seat allocation, cancellations, and fleet scheduling." />
+    <meta property="og:title" content="Reno Transit Engine - Smart Bus Reservation & Fleet System" />
+    <meta property="og:description" content="Reno Transit Engine: Professional intercity bus ticket booking, real-time seat allocation, cancellations, and fleet scheduling." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <script>
+      // Ensure window.fetch has both getter and setter so browser extensions don't crash when overriding fetch
+      try {
+        var _fetch = window.fetch;
+        Object.defineProperty(window, 'fetch', {
+          configurable: true,
+          enumerable: true,
+          get: function() {
+            return _fetch;
+          },
+          set: function(fn) {
+            _fetch = fn;
+          }
+        });
+      } catch (e) {}
+
+      // Suppress external extension injection errors
+      window.addEventListener('error', function(e) {
+        if (e && e.message && e.message.indexOf('fetch') !== -1 && e.message.indexOf('only a getter') !== -1) {
+          e.stopImmediatePropagation();
+          e.preventDefault();
+          return true;
+        }
+      }, true);
+    </script>
+  </head>
+  <body class="bg-slate-50 text-slate-900 antialiased font-sans selection:bg-blue-600/10 selection:text-blue-700">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

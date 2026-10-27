@@ -1,0 +1,93 @@
+================================================================================
+SMART BUS RESERVATION SYSTEM - FORMAL ACCEPTANCE TEST LOG (PRD SECTION 14)
+Date: 2026-10-24
+Test Environment: Python 3 Standard Library / In-Memory Session
+Status: ALL 12 TEST CASES PASSED (100% COMPLIANCE)
+================================================================================
+
+[TC-01]
+Scenario: View all routes
+Input / Action: Choose View Available Routes (Option 1)
+Expected Result: All five starter routes (R101-R105) and seat statuses appear.
+Actual Result: All 5 routes printed with Route ID, Journey, Departure Time, Fare in Rs., and initial seat counts (40/40, 36/36, 32/32, 45/45, 30/30).
+Match: PASS
+
+[TC-02]
+Scenario: Search Hyderabad
+Input / Action: Option 2 -> Search city 'Hyderabad'
+Expected Result: Routes departing from or arriving at Hyderabad appear.
+Actual Result: Returned R101 (Karachi -> Hyderabad), R103 (Hyderabad -> Mirpur Khas), and R105 (Sukkur -> Hyderabad).
+Match: PASS
+
+[TC-03]
+Scenario: Unknown city
+Input / Action: Option 2 -> Search 'Atlantis'
+Expected Result: No-match message; program continues cleanly without error.
+Actual Result: Displayed "No routes found matching 'Atlantis'." Program returned to main menu loop.
+Match: PASS
+
+[TC-04]
+Scenario: Book two seats
+Input / Action: Option 3 -> Name: 'Ahmed', Age: 24, Route: 'R101', Seats: 2
+Expected Result: Booking confirmed for Rs. 2,400; R101 availability drops by 2 (from 40 to 38).
+Actual Result: Booking confirmed with ID B1001; Passenger: Ahmed; Fare per seat: Rs. 1200; Total fare: Rs. 2400; Status: Confirmed. Route R101 available seats updated to 38.
+Match: PASS
+
+[TC-05]
+Scenario: Zero seats
+Input / Action: Option 3 -> Attempt booking with 0 seats
+Expected Result: Reject; no booking or seat change.
+Actual Result: Displayed "Validation Error (BR-04): Seat quantity must be greater than zero." Route seats and bookings remain unmodified.
+Match: PASS
+
+[TC-06]
+Scenario: Too many seats
+Input / Action: Option 3 -> Request more than available seats (e.g. 50 on R101)
+Expected Result: Reject; availability never becomes negative.
+Actual Result: Displayed "Validation Error (BR-05): Requested 50 seats, but only 38 available." Availability maintained at 38.
+Match: PASS
+
+[TC-07]
+Scenario: Cancel confirmed booking
+Input / Action: Option 5 -> Enter Confirmed booking ID 'B1001'
+Expected Result: Status changes to Cancelled and correct seats (2) are restored to R101.
+Actual Result: Booking B1001 cancelled; Seats restored: 2; Route R101 available seats updated from 38 back to 40.
+Match: PASS
+
+[TC-08]
+Scenario: Cancel same booking again
+Input / Action: Option 5 -> Repeat cancelled ID 'B1001'
+Expected Result: Reject; no additional seat restoration.
+Actual Result: Displayed "Error (BR-09): Booking B1001 is already Cancelled. Cannot cancel again." R101 availability remains at 40.
+Match: PASS
+
+[TC-09]
+Scenario: Report with no bookings
+Input / Action: In fresh session -> Option 7 (Generate Booking Report)
+Expected Result: Booking totals and revenue are zero; route statuses are still counted.
+Actual Result: Total bookings: 0, Confirmed: 0, Cancelled: 0, Seats reserved: 0, Confirmed revenue: Rs. 0, Fully booked routes: 0.
+Match: PASS
+
+[TC-10]
+Scenario: Book all seats
+Input / Action: Option 3 -> Request exactly remaining seats (e.g., 30 seats on R105)
+Expected Result: Booking succeeds; availability becomes zero; Fully Booked status.
+Actual Result: Booking B1002 confirmed for 30 seats. R105 available seats updated to 0/30 (Fully Booked).
+Match: PASS
+
+[TC-11]
+Scenario: Report after cancellation
+Input / Action: Cancel a confirmed booking, then generate report (Option 7)
+Expected Result: Cancelled count increases; cancelled fare excluded from confirmed revenue.
+Actual Result: Total bookings: 2, Confirmed: 1, Cancelled: 1; Confirmed revenue reflects only active bookings; cancelled ticket revenue omitted.
+Match: PASS
+
+[TC-12]
+Scenario: Invalid menu option
+Input / Action: Enter unsupported text/number (e.g. '99' or 'abc')
+Expected Result: Helpful error; program returns to main menu without crashing.
+Actual Result: Displayed "Invalid choice '99'. Please select an option between 1 and 9." Menu repeated successfully.
+Match: PASS
+================================================================================
+OVERALL VERDICT: ALL ACCEPTANCE CRITERIA SATISFIED
+================================================================================
